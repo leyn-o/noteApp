@@ -1,13 +1,15 @@
-package de.leyn.noteapp
+package de.leyn.noteapp.ui.activities
 
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.snackbar.Snackbar
+import de.leyn.noteapp.ui.AddNoteDialog
+import de.leyn.noteapp.Note
+import de.leyn.noteapp.R
 import de.leyn.noteapp.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), AddNoteDialog.AddNoteDialogListener {
 
     private lateinit var binding: ActivityMainBinding
 
@@ -21,8 +23,10 @@ class MainActivity : AppCompatActivity() {
 
 
         binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+            //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+            //    .setAction("Action", null).show()
+            val dialog = AddNoteDialog()
+            dialog.show(supportFragmentManager, "test")
         }
 
 
@@ -42,6 +46,10 @@ class MainActivity : AppCompatActivity() {
             R.id.action_settings -> true
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    override fun onDialogPositiveClick(newNote: Note) {
+        //TODO: Implement
     }
 
 
