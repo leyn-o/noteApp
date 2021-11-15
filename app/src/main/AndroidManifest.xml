@@ -3,6 +3,7 @@
     package="de.leyn.noteapp">
 
     <application
+        android:name=".App"
         android:allowBackup="true"
         android:fullBackupOnly="true"
         android:icon="@mipmap/ic_launcher"
@@ -24,7 +25,7 @@
             android:name=".ui.activities.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
-            android:theme="@style/Theme.NoteApp.NoActionBar"/>
+            android:theme="@style/Theme.NoteApp.NoActionBar" />
     </application>
 
 </manifest>

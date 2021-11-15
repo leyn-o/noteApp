@@ -7,9 +7,9 @@ import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import com.google.android.material.textfield.TextInputEditText
-import de.leyn.noteapp.Note
 import de.leyn.noteapp.R
 import de.leyn.noteapp.databinding.AddNoteBinding
+import de.leyn.noteapp.db.NoteBean
 
 /**
  * Created by Leyn on 14.11.2021.
@@ -21,7 +21,7 @@ class AddNoteDialog : DialogFragment() {
     lateinit var binding: AddNoteBinding
 
     interface AddNoteDialogListener {
-        fun onDialogPositiveClick(newNote: Note)
+        fun onDialogPositiveClick(newNote: NoteBean)
     }
 
     override fun onAttach(context: Context) {
@@ -49,7 +49,8 @@ class AddNoteDialog : DialogFragment() {
             setPositiveButton(R.string.save) { _, _ ->
                 val title = inputTitle.text.toString()
                 val text = inputText.text.toString()
-                listener.onDialogPositiveClick(Note(title, text))
+                //TODO: text can somehow not be fetched from fields
+                listener.onDialogPositiveClick(NoteBean("title", "text"))
             }
             setNegativeButton(R.string.cancel) { _, _ ->
                 dismiss()
