@@ -30,9 +30,9 @@ class MainViewModel(
         }
     }
 
-    fun saveNoteToDB(note: NoteBean) {
+    fun deleteNoteFromDB(note: NoteBean) {
         CoroutineScope(Dispatchers.IO).launch {
-            db.noteDao().insertNote(note)
+            db.noteDao().deleteNote(note)
         }
     }
 }

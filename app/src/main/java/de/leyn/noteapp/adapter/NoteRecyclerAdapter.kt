@@ -40,6 +40,10 @@ class NoteRecyclerAdapter(
 
         init {
             view.setOnClickListener(this)
+
+            binding.deleteButton.setOnClickListener {
+                onNoteClickListener.onNoteDeleteClicked(adapterPosition)
+            }
         }
 
         fun bindContent(note: NoteBean) {
@@ -53,6 +57,7 @@ class NoteRecyclerAdapter(
 
         interface OnNoteClickListener {
             fun onNoteClicked(position: Int)
+            fun onNoteDeleteClicked(position: Int)
         }
 
 

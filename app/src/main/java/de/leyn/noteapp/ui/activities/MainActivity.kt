@@ -101,4 +101,10 @@ class MainActivity : AppCompatActivity(),
         startActivity(intent)
     }
 
+    override fun onNoteDeleteClicked(position: Int) {
+        mainViewModel.deleteNoteFromDB(noteList[position])
+        noteList.removeAt(position)
+        recyclerAdapter.notifyItemRemoved(position)
+    }
+
 }

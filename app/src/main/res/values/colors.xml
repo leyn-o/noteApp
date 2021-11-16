@@ -16,4 +16,6 @@
     <color name="onSurface">#252525</color>
     <color name="onError">#FFFFFFFF</color>
 
+    <color name="noteBackground">#FBEDC0</color>
+
 </resources>

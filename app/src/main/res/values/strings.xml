@@ -10,6 +10,7 @@
 
     <!-- Content descriptions for XML -->
     <string name="content_description_splash_image">lightbulb</string>
+    <string name="content_description_delete">Notiz löschen</string>
     <string name="content_description_fab">add new note</string>
 
 
