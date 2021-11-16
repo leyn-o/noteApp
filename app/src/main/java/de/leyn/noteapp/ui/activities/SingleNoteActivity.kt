@@ -53,12 +53,15 @@ class SingleNoteActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
 
         if (viewModel.isNewNote) {
-            viewModel.insertNote(
-                NoteBean(
-                    binding.titleEditText.text.toString(),
-                    binding.textEditText.text.toString()
+            if(!isEmptyContent()) {
+                viewModel.insertNote(
+                    NoteBean(
+                        binding.titleEditText.text.toString(),
+                        binding.textEditText.text.toString()
+                    )
                 )
-            )
+            }
+
         } else {
             viewModel.currentNote.apply {
                 title = binding.titleEditText.text.toString()
@@ -70,5 +73,9 @@ class SingleNoteActivity : AppCompatActivity() {
 
         onBackPressed()
         return true
+    }
+
+    private fun isEmptyContent(): Boolean {
+        return binding.textEditText.text.toString().isEmpty() && binding.titleEditText.text.toString().isEmpty()
     }
 }
