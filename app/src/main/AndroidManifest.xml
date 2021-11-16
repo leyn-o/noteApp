@@ -12,9 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NoteApp">
         <activity
+            android:name=".ui.activities.SingleNoteActivity"
+            android:exported="true" />
+        <activity
             android:name=".ui.activities.SplashScreenActivity"
             android:exported="true"
-            android:theme="@style/Theme.NoteApp.NoActionBar">
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,8 +27,7 @@
         <activity
             android:name=".ui.activities.MainActivity"
             android:exported="true"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.NoteApp.NoActionBar" />
+            android:label="@string/app_name" />
     </application>
 
 </manifest>

@@ -2,10 +2,9 @@
     <string name="app_name">NoteApp</string>
     <string name="action_refresh">Aktualisieren</string>
 
-
     <string name="new_note">Neue Notiz</string>
     <string name="title">Titel</string>
-    <string name="text">Text</string>
+    <string name="text">Notiz</string>
     <string name="cancel">Abbrechen</string>
     <string name="save">Speichern</string>
 
