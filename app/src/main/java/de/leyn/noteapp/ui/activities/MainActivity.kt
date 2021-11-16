@@ -14,7 +14,6 @@ import de.leyn.noteapp.R
 import de.leyn.noteapp.adapter.NoteRecyclerAdapter
 import de.leyn.noteapp.databinding.ActivityMainBinding
 import de.leyn.noteapp.db.NoteBean
-import de.leyn.noteapp.ui.AddNoteDialog
 import de.leyn.noteapp.ui.viewmodel.MainViewModel
 import de.leyn.noteapp.ui.viewmodel.ViewModelFactory
 
