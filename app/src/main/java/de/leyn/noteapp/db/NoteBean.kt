@@ -10,8 +10,8 @@ import java.io.Serializable
  */
 @Entity(tableName = "notes")
 data class NoteBean(
-    @ColumnInfo(name = "title") val title: String,
-    @ColumnInfo(name = "text") val text: String
+    @ColumnInfo(name = "title") var title: String,
+    @ColumnInfo(name = "text") var text: String
 ) : Serializable {
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0

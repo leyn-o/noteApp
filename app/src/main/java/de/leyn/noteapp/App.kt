@@ -11,6 +11,10 @@ class App : Application() {
 
     private lateinit var db: NoteDatabase
 
+    companion object {
+        const val INTENT_NOTE = "Note"
+    }
+
     override fun onCreate() {
         super.onCreate()
 

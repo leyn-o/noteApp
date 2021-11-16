@@ -16,9 +16,9 @@ import de.leyn.noteapp.databinding.ActivityMainBinding
 import de.leyn.noteapp.db.NoteBean
 import de.leyn.noteapp.ui.AddNoteDialog
 import de.leyn.noteapp.ui.viewmodel.MainViewModel
-import de.leyn.noteapp.ui.viewmodel.MainViewModelFactory
+import de.leyn.noteapp.ui.viewmodel.ViewModelFactory
 
-class MainActivity : AppCompatActivity(), AddNoteDialog.AddNoteDialogListener,
+class MainActivity : AppCompatActivity(),
     NoteRecyclerAdapter.NoteViewHolder.OnNoteClickListener {
 
     private lateinit var binding: ActivityMainBinding
@@ -36,13 +36,13 @@ class MainActivity : AppCompatActivity(), AddNoteDialog.AddNoteDialogListener,
         setSupportActionBar(binding.toolbar)
 
         val db = (application as App).getDB()
-        mainViewModel = MainViewModelFactory(db).create(MainViewModel::class.java)
+        mainViewModel = ViewModelFactory(db).create(MainViewModel::class.java)
 
         fetchNotesList()
 
         binding.fab.setOnClickListener { _ ->
-            val dialog = AddNoteDialog()
-            dialog.show(supportFragmentManager, "test")
+            val intent = Intent(this, SingleNoteActivity::class.java)
+            startActivity(intent)
         }
 
         mainViewModel.notes.observe(this, {
@@ -56,6 +56,12 @@ class MainActivity : AppCompatActivity(), AddNoteDialog.AddNoteDialogListener,
             }
         })
     }
+
+    override fun onRestart() {
+        super.onRestart()
+        fetchNotesList()
+    }
+
 
     private fun initRecyclerView() {
         binding.recyclerView.layoutManager = LinearLayoutManager(applicationContext)
@@ -90,16 +96,10 @@ class MainActivity : AppCompatActivity(), AddNoteDialog.AddNoteDialogListener,
         }
     }
 
-    override fun onDialogPositiveClick(newNote: NoteBean) {
-        mainViewModel.saveNoteToDB(newNote)
-        fetchNotesList()
-    }
-
     override fun onNoteClicked(position: Int) {
         val intent = Intent(this, SingleNoteActivity::class.java)
-        intent.putExtra("note", noteList[position])
+        intent.putExtra(App.INTENT_NOTE, noteList[position])
         startActivity(intent)
     }
-
 
 }
