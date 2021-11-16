@@ -5,6 +5,7 @@ import android.graphics.PorterDuffColorFilter
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.widget.doOnTextChanged
 import de.leyn.noteapp.App
 import de.leyn.noteapp.R
 import de.leyn.noteapp.databinding.ActivitySingleNoteBinding
@@ -45,8 +46,15 @@ class SingleNoteActivity : AppCompatActivity() {
             viewModel.currentNote = note
             binding.titleEditText.text = note.title.toEditable()
             binding.textEditText.text = note.text.toEditable()
+            supportActionBar?.title = note.title
+
         } else {
             viewModel.isNewNote = true
+            supportActionBar?.title = resources.getString(R.string.new_note)
+        }
+
+        binding.titleEditText.doOnTextChanged { text, _, _, _ ->
+            supportActionBar?.title = text
         }
     }
 
