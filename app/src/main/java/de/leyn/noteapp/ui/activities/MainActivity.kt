@@ -75,28 +75,6 @@ class MainActivity : AppCompatActivity(),
         mainViewModel.fetchNotesFromDB()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_main, menu)
-        menu.forEach { item ->
-            item.icon.colorFilter = PorterDuffColorFilter(
-                resources.getColor(R.color.onPrimary, null),
-                PorterDuff.Mode.SRC_ATOP
-            )
-        }
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
-        return when (item.itemId) {
-            R.id.action_refresh -> {
-                fetchNotesList()
-                return true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
-
     override fun onNoteClicked(position: Int) {
         val intent = Intent(this, SingleNoteActivity::class.java)
         intent.putExtra(App.INTENT_NOTE, noteList[position])
