@@ -16,8 +16,8 @@ It comprises the following technical features:
 - Splash screen animation
 
 <p>
-<img src="NoteApp_all_notes.jpg" width="250"/>
-<img src="NoteApp_note_detail.jpg" width="250"/>
-<img src="NoteApp_delete_dialog.jpg" width="250"/>
+<img src="images/NoteApp_all_notes.jpg" width="250"/>
+<img src="images/NoteApp_note_detail.jpg" width="250"/>
+<img src="images/NoteApp_delete_dialog.jpg" width="250"/>
 </p>
 
