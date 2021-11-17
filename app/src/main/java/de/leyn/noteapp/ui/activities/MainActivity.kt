@@ -14,11 +14,13 @@ import de.leyn.noteapp.R
 import de.leyn.noteapp.adapter.NoteRecyclerAdapter
 import de.leyn.noteapp.databinding.ActivityMainBinding
 import de.leyn.noteapp.db.NoteBean
+import de.leyn.noteapp.ui.DeleteConfirmationDialog
 import de.leyn.noteapp.ui.viewmodel.MainViewModel
 import de.leyn.noteapp.ui.viewmodel.ViewModelFactory
 
 class MainActivity : AppCompatActivity(),
-    NoteRecyclerAdapter.NoteViewHolder.OnNoteClickListener {
+    NoteRecyclerAdapter.NoteViewHolder.OnNoteClickListener,
+    DeleteConfirmationDialog.DeleteNoteDialogListener {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var mainViewModel: MainViewModel
@@ -102,6 +104,11 @@ class MainActivity : AppCompatActivity(),
     }
 
     override fun onNoteDeleteClicked(position: Int) {
+        val dialog = DeleteConfirmationDialog(position, noteList[position].title)
+        dialog.show(supportFragmentManager, "deleteDialod")
+    }
+
+    override fun onDialogPositiveClick(position: Int) {
         mainViewModel.deleteNoteFromDB(noteList[position])
         noteList.removeAt(position)
         recyclerAdapter.notifyItemRemoved(position)

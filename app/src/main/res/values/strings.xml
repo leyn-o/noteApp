@@ -3,10 +3,13 @@
     <string name="action_refresh">Aktualisieren</string>
 
     <string name="new_note">Neue Notiz</string>
+    <string name="delete_note">Notiz löschen</string>
+    <string name="delete_note_question">Möchten Sie die Notiz %1$s löschen?</string>
     <string name="title">Titel</string>
     <string name="text">Notiz</string>
+
     <string name="cancel">Abbrechen</string>
-    <string name="save">Speichern</string>
+    <string name="delete">Löschen</string>
 
     <!-- Content descriptions for XML -->
     <string name="content_description_splash_image">lightbulb</string>
