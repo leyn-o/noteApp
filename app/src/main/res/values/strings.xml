@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">NoteApp</string>
+    <string name="app_name">Notes</string>
     <string name="action_refresh">Aktualisieren</string>
 
     <string name="new_note">Neue Notiz</string>
