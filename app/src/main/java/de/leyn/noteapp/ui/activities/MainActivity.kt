@@ -1,29 +1,23 @@
 package de.leyn.noteapp.ui.activities
 
 import android.content.Intent
-import android.graphics.PorterDuff
-import android.graphics.PorterDuffColorFilter
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.forEach
 import androidx.recyclerview.widget.LinearLayoutManager
 import de.leyn.noteapp.App
-import de.leyn.noteapp.R
 import de.leyn.noteapp.adapter.NoteRecyclerAdapter
 import de.leyn.noteapp.databinding.ActivityMainBinding
 import de.leyn.noteapp.db.NoteBean
 import de.leyn.noteapp.ui.DeleteConfirmationDialog
-import de.leyn.noteapp.ui.viewmodel.MainViewModel
+import de.leyn.noteapp.ui.viewmodel.NoteViewModel
 import de.leyn.noteapp.ui.viewmodel.ViewModelFactory
 
 class MainActivity : AppCompatActivity(),
-    NoteRecyclerAdapter.NoteViewHolder.OnNoteClickListener,
-    DeleteConfirmationDialog.DeleteNoteDialogListener {
+        NoteRecyclerAdapter.NoteViewHolder.OnNoteClickListener,
+        DeleteConfirmationDialog.DeleteNoteDialogListener {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var mainViewModel: MainViewModel
+    private lateinit var viewModel: NoteViewModel
     private lateinit var recyclerAdapter: NoteRecyclerAdapter
     private val noteList: MutableList<NoteBean> = mutableListOf()
 
@@ -37,7 +31,7 @@ class MainActivity : AppCompatActivity(),
         setSupportActionBar(binding.toolbar)
 
         val db = (application as App).getDB()
-        mainViewModel = ViewModelFactory(db).create(MainViewModel::class.java)
+        viewModel = ViewModelFactory(db).create(NoteViewModel::class.java)
 
         fetchNotesList()
 
@@ -46,7 +40,7 @@ class MainActivity : AppCompatActivity(),
             startActivity(intent)
         }
 
-        mainViewModel.notes.observe(this, {
+        viewModel.notes.observe(this, {
             noteList.clear()
             noteList.addAll(it)
 
@@ -72,7 +66,7 @@ class MainActivity : AppCompatActivity(),
     }
 
     private fun fetchNotesList() {
-        mainViewModel.fetchNotesFromDB()
+        viewModel.fetchNotesFromDB()
     }
 
     override fun onNoteClicked(position: Int) {
@@ -87,7 +81,7 @@ class MainActivity : AppCompatActivity(),
     }
 
     override fun onDialogPositiveClick(position: Int) {
-        mainViewModel.deleteNoteFromDB(noteList[position])
+        viewModel.deleteNoteFromDB(noteList[position])
         noteList.removeAt(position)
         recyclerAdapter.notifyItemRemoved(position)
     }

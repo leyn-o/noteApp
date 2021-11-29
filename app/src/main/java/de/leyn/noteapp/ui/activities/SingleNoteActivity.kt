@@ -11,13 +11,13 @@ import de.leyn.noteapp.R
 import de.leyn.noteapp.databinding.ActivitySingleNoteBinding
 import de.leyn.noteapp.db.NoteBean
 import de.leyn.noteapp.toEditable
-import de.leyn.noteapp.ui.viewmodel.SingleNoteViewModel
+import de.leyn.noteapp.ui.viewmodel.NoteViewModel
 import de.leyn.noteapp.ui.viewmodel.ViewModelFactory
 
 class SingleNoteActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySingleNoteBinding
-    private lateinit var viewModel: SingleNoteViewModel
+    private lateinit var viewModel: NoteViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,13 +31,13 @@ class SingleNoteActivity : AppCompatActivity() {
             setDisplayShowHomeEnabled(true)
             val backArrow = ResourcesCompat.getDrawable(resources, R.drawable.arrow_back, null)
             backArrow?.colorFilter = PorterDuffColorFilter(
-                resources.getColor(R.color.onPrimary, null),
-                PorterDuff.Mode.SRC_ATOP
+                    resources.getColor(R.color.onPrimary, null),
+                    PorterDuff.Mode.SRC_ATOP
             )
             setHomeAsUpIndicator(backArrow)
         }
         val db = (application as App).getDB()
-        viewModel = ViewModelFactory(db).create(SingleNoteViewModel::class.java)
+        viewModel = ViewModelFactory(db).create(NoteViewModel::class.java)
 
 
         if (intent.hasExtra(App.INTENT_NOTE)) {
@@ -61,12 +61,12 @@ class SingleNoteActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
 
         if (viewModel.isNewNote) {
-            if(!isEmptyContent()) {
+            if (!isEmptyContent()) {
                 viewModel.insertNote(
-                    NoteBean(
-                        binding.titleEditText.text.toString(),
-                        binding.textEditText.text.toString()
-                    )
+                        NoteBean(
+                                binding.titleEditText.text.toString(),
+                                binding.textEditText.text.toString()
+                        )
                 )
             }
 
