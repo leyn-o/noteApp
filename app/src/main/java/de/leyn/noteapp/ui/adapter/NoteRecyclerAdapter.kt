@@ -1,5 +1,6 @@
 package de.leyn.noteapp.ui.adapter
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -40,13 +41,13 @@ class NoteRecyclerAdapter(
 
         init {
             view.setOnClickListener(this)
-
             binding.deleteButton.setOnClickListener {
                 onNoteClickListener.onNoteDeleteClicked(adapterPosition)
             }
         }
 
         fun bindContent(note: NoteBean) {
+            binding.noteCard.setBackgroundColor(Color.parseColor(note.color))
             binding.cardTitle.text = note.title
             binding.cardText.text = note.text
             binding.createdDateText.text = note.createdDate

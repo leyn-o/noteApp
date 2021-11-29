@@ -15,6 +15,7 @@ data class NoteBean(
     @ColumnInfo(name = "title") var title: String,
     @ColumnInfo(name = "text") var text: String,
     @ColumnInfo(name = "createdDate") var createdDate: String,
-    @ColumnInfo(name = "lastEditedDate") var lastEditedDate: String
+    @ColumnInfo(name = "lastEditedDate") var lastEditedDate: String,
+    @ColumnInfo(name= "color") var color: String = NoteColors.YELLOW.hexColor
 ) : Serializable {
 }

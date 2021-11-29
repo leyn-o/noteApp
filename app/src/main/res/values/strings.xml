@@ -11,9 +11,15 @@
     <string name="cancel">Abbrechen</string>
     <string name="delete">Löschen</string>
 
+    <string name="yellow">Gelb</string>
+    <string name="green">Grün</string>
+    <string name="blue">Blau</string>
+    <string name="red">Rot</string>
+
     <!-- Content descriptions for XML -->
     <string name="content_description_splash_image">lightbulb</string>
     <string name="content_description_delete">Notiz löschen</string>
+    <string name="content_description_more">Weitere Optionen</string>
     <string name="content_description_fab">add new note</string>
 
     <string name="latest_first">Neuste zuerst</string>

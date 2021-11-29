@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/default_margin"
-    android:background="@color/noteBackground">
+    android:background="@color/noteBackgroundYellow">
 
     <TextView
         android:id="@+id/cardTitle"
@@ -49,6 +49,7 @@
         app:layout_constraintBottom_toTopOf="@+id/createdDateText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 
     <TextView
         android:layout_width="wrap_content"
