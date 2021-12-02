@@ -11,8 +11,9 @@ import java.io.Serializable
 @Entity(tableName = "notes")
 data class NoteBean(
     @ColumnInfo(name = "title") var title: String,
-    @ColumnInfo(name = "text") var text: String
-) : Serializable {
+    @ColumnInfo(name = "text") var text: String,
     @PrimaryKey(autoGenerate = true)
-    var id: Int = 0
+    var id: Int? = null
+) : Serializable {
+
 }
