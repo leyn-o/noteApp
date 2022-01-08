@@ -10,9 +10,11 @@ import de.leyn.noteapp.App
 import de.leyn.noteapp.R
 import de.leyn.noteapp.databinding.ActivitySingleNoteBinding
 import de.leyn.noteapp.db.NoteBean
+import de.leyn.noteapp.extensions.convertToString
 import de.leyn.noteapp.toEditable
 import de.leyn.noteapp.ui.viewmodel.NoteViewModel
 import de.leyn.noteapp.ui.viewmodel.ViewModelFactory
+import java.util.*
 
 class SingleNoteActivity : AppCompatActivity() {
 
@@ -31,8 +33,8 @@ class SingleNoteActivity : AppCompatActivity() {
             setDisplayShowHomeEnabled(true)
             val backArrow = ResourcesCompat.getDrawable(resources, R.drawable.arrow_back, null)
             backArrow?.colorFilter = PorterDuffColorFilter(
-                    resources.getColor(R.color.onPrimary, null),
-                    PorterDuff.Mode.SRC_ATOP
+                resources.getColor(R.color.onPrimary, null),
+                PorterDuff.Mode.SRC_ATOP
             )
             setHomeAsUpIndicator(backArrow)
         }
@@ -63,17 +65,22 @@ class SingleNoteActivity : AppCompatActivity() {
         if (viewModel.isNewNote) {
             if (!isEmptyContent()) {
                 viewModel.insertNote(
-                        NoteBean(
-                                binding.titleEditText.text.toString(),
-                                binding.textEditText.text.toString()
-                        )
+                    NoteBean(
+                        title = binding.titleEditText.text.toString(),
+                        text = binding.textEditText.text.toString(),
+                        createdDate = Date().convertToString(),
+                        lastEditedDate = Date().convertToString()
+                    )
                 )
             }
 
         } else {
             viewModel.currentNote.apply {
+                // TODO: lastEditedDate is also changed even if actual Note content has not changed.
+                //  Need to compare original message with new message.
                 title = binding.titleEditText.text.toString()
                 text = binding.textEditText.text.toString()
+                lastEditedDate = Date().convertToString()
             }
 
             viewModel.updateNote()
@@ -84,6 +91,7 @@ class SingleNoteActivity : AppCompatActivity() {
     }
 
     private fun isEmptyContent(): Boolean {
-        return binding.textEditText.text.toString().isEmpty() && binding.titleEditText.text.toString().isEmpty()
+        return binding.textEditText.text.toString()
+            .isEmpty() && binding.titleEditText.text.toString().isEmpty()
     }
 }

@@ -40,7 +40,7 @@ class NoteDaoTest {
 
     @Test
     fun insertShoppingItem() = runBlockingTest {
-        val noteBean = NoteBean("Title", "Text", id = 1)
+        val noteBean = NoteBean(id = 1,"Title", "Text", "01.01.01", "01.01.01")
         dao.insertNote(noteBean)
 
         val allNotes = dao.getAllNotes()
@@ -49,7 +49,7 @@ class NoteDaoTest {
 
     @Test
     fun deleteShoppingItem() = runBlockingTest {
-        val noteBean = NoteBean("Title", "Text", id = 1)
+        val noteBean = NoteBean(id = 1,"Title", "Text", "01.01.01", "01.01.01")
         dao.insertNote(noteBean)
         dao.deleteNote(noteBean)
 
