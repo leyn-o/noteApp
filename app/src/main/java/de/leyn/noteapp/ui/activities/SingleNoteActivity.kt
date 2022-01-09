@@ -47,7 +47,7 @@ class SingleNoteActivity : AppCompatActivity() {
         if (intent.hasExtra(App.INTENT_NOTE)) {
             viewModel.isNewNote = false
             val note = intent.getSerializableExtra(App.INTENT_NOTE) as NoteBean
-            viewModel.currentNote = note
+            viewModel.singleNote = note
             binding.titleEditText.text = note.title.toEditable()
             binding.textEditText.text = note.text.toEditable()
             supportActionBar?.title = note.title
@@ -77,14 +77,13 @@ class SingleNoteActivity : AppCompatActivity() {
             }
 
         } else {
-            viewModel.currentNote.apply {
-                // TODO: lastEditedDate is also changed even if actual Note content has not changed.
-                //  Need to compare original message with new message.
-                title = binding.titleEditText.text.toString()
-                text = binding.textEditText.text.toString()
-                lastEditedDate = Date().convertToString()
+            if (!isIdenticalToOriginalNote()) {
+                viewModel.singleNote.apply {
+                    title = binding.titleEditText.text.toString().trim()
+                    text = binding.textEditText.text.toString().trim()
+                    lastEditedDate = Date().convertToString()
+                }
             }
-
             viewModel.updateNote()
         }
 
@@ -95,5 +94,11 @@ class SingleNoteActivity : AppCompatActivity() {
     private fun isEmptyContent(): Boolean {
         return binding.textEditText.text.toString()
             .isEmpty() && binding.titleEditText.text.toString().isEmpty()
+    }
+
+    private fun isIdenticalToOriginalNote(): Boolean {
+        val currentTitle = binding.titleEditText.text.toString()
+        val currentText = binding.textEditText.text.toString()
+        return currentTitle == viewModel.singleNote.title && currentText == viewModel.singleNote.text
     }
 }

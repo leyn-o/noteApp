@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import de.leyn.noteapp.db.NoteBean
-import de.leyn.noteapp.db.DatabaseService
 import de.leyn.noteapp.db.NoteDataSource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -21,7 +20,7 @@ class NoteViewModel(
         value = listOf()
     }
     val notes: LiveData<List<NoteBean>> = _notes
-    lateinit var currentNote: NoteBean
+    lateinit var singleNote: NoteBean
     var isNewNote: Boolean = false
 
     fun fetchNotesFromDB() {
@@ -47,7 +46,7 @@ class NoteViewModel(
 
     fun updateNote() {
         CoroutineScope(Dispatchers.IO).launch {
-            dataSource.updateNote(currentNote)
+            dataSource.updateNote(singleNote)
         }
     }
 }
