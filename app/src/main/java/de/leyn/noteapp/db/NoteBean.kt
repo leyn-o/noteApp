@@ -3,13 +3,7 @@ package de.leyn.noteapp.db
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import de.leyn.noteapp.extensions.convertToString
 import java.io.Serializable
-import java.text.DateFormat
-import java.text.DateFormat.DEFAULT
-import java.text.DateFormat.getDateTimeInstance
-import java.text.SimpleDateFormat
-import java.util.*
 
 /**
  * Created by Leyn on 14.11.2021.

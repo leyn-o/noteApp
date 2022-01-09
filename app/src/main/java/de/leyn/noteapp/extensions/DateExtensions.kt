@@ -4,10 +4,10 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-const val dateTimePattern = "dd.MM.yy HH:mm:ss"
 private val locale = Locale("de", "DE")
-private val dateFormatter = SimpleDateFormat(dateTimePattern, locale)
+const val dateTimePattern = "dd.MM.yy HH:mm:ss"
+private val dateTimeFormatter = SimpleDateFormat(dateTimePattern, locale)
 
-fun String.convertToDate(): Date? = dateFormatter.parse(this)
+fun String.convertToDate(): Date? = dateTimeFormatter.parse(this)
 
-fun Date.convertToString(): String = dateFormatter.format(this)
+fun Date.convertToDateTimeString(): String = dateTimeFormatter.format(this)

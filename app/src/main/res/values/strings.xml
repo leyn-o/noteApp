@@ -16,5 +16,9 @@
     <string name="content_description_delete">Notiz löschen</string>
     <string name="content_description_fab">add new note</string>
 
+    <string name="latest_first">Neuste zuerst</string>
+    <string name="oldest_first">Älteste zuerst</string>
+    <string name="created_at">Erstellt am:</string>
+
 
 </resources>

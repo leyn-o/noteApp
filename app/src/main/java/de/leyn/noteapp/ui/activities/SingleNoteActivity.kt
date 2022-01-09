@@ -11,7 +11,7 @@ import de.leyn.noteapp.R
 import de.leyn.noteapp.databinding.ActivitySingleNoteBinding
 import de.leyn.noteapp.db.NoteBean
 import de.leyn.noteapp.db.RoomNoteDataSourceImpl
-import de.leyn.noteapp.extensions.convertToString
+import de.leyn.noteapp.extensions.convertToDateTimeString
 import de.leyn.noteapp.toEditable
 import de.leyn.noteapp.ui.viewmodel.NoteViewModel
 import de.leyn.noteapp.ui.viewmodel.ViewModelFactory
@@ -70,8 +70,8 @@ class SingleNoteActivity : AppCompatActivity() {
                     NoteBean(
                         title = binding.titleEditText.text.toString(),
                         text = binding.textEditText.text.toString(),
-                        createdDate = Date().convertToString(),
-                        lastEditedDate = Date().convertToString()
+                        createdDate = Date().convertToDateTimeString(),
+                        lastEditedDate = Date().convertToDateTimeString()
                     )
                 )
             }
@@ -81,7 +81,7 @@ class SingleNoteActivity : AppCompatActivity() {
                 viewModel.singleNote.apply {
                     title = binding.titleEditText.text.toString().trim()
                     text = binding.textEditText.text.toString().trim()
-                    lastEditedDate = Date().convertToString()
+                    lastEditedDate = Date().convertToDateTimeString()
                 }
             }
             viewModel.updateNote()

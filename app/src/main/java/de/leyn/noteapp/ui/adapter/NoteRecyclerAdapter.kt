@@ -49,6 +49,7 @@ class NoteRecyclerAdapter(
         fun bindContent(note: NoteBean) {
             binding.cardTitle.text = note.title
             binding.cardText.text = note.text
+            binding.createdDateText.text = note.createdDate
         }
 
         override fun onClick(v: View?) {
