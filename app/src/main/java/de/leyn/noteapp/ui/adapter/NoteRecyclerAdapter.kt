@@ -1,4 +1,4 @@
-package de.leyn.noteapp.adapter
+package de.leyn.noteapp.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.View

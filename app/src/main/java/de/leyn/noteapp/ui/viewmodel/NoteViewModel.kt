@@ -4,7 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import de.leyn.noteapp.db.NoteBean
-import de.leyn.noteapp.db.NoteDatabase
+import de.leyn.noteapp.db.DatabaseService
+import de.leyn.noteapp.db.NoteDataSource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -13,7 +14,7 @@ import kotlinx.coroutines.launch
  * Created by Leyn on 14.11.2021.
  */
 class NoteViewModel(
-        val db: NoteDatabase
+    private val dataSource: NoteDataSource
 ) : ViewModel() {
 
     private val _notes = MutableLiveData<List<NoteBean>>().apply {
@@ -25,7 +26,7 @@ class NoteViewModel(
 
     fun fetchNotesFromDB() {
         CoroutineScope(Dispatchers.IO).launch {
-            val allNotes = db.noteDao().getAllNotes()
+            val allNotes = dataSource.getAllNotes()
             CoroutineScope(Dispatchers.Main).launch {
                 _notes.value = allNotes
             }
@@ -34,19 +35,19 @@ class NoteViewModel(
 
     fun deleteNoteFromDB(note: NoteBean) {
         CoroutineScope(Dispatchers.IO).launch {
-            db.noteDao().deleteNote(note)
+            dataSource.deleteNote(note)
         }
     }
 
     fun insertNote(noteBean: NoteBean) {
         CoroutineScope(Dispatchers.IO).launch {
-            db.noteDao().insertNote(noteBean)
+            dataSource.insertNote(noteBean)
         }
     }
 
     fun updateNote() {
         CoroutineScope(Dispatchers.IO).launch {
-            db.noteDao().updateNote(currentNote)
+            dataSource.updateNote(currentNote)
         }
     }
 }

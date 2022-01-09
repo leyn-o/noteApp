@@ -20,26 +20,26 @@ import org.junit.runner.RunWith
 @SmallTest
 class NoteDaoTest {
 
-    private lateinit var database: NoteDatabase
+    private lateinit var databaseService: DatabaseService
     private lateinit var dao: NoteDao
 
     @Before
     fun setup() {
-        database = Room.inMemoryDatabaseBuilder(
+        databaseService = Room.inMemoryDatabaseBuilder(
             ApplicationProvider.getApplicationContext(),
-            NoteDatabase::class.java
+            DatabaseService::class.java
         ).allowMainThreadQueries()
             .build()
-        dao = database.noteDao()
+        dao = databaseService.noteDao()
     }
 
     @After
     fun teardown() {
-        database.close()
+        databaseService.close()
     }
 
     @Test
-    fun insertShoppingItem() = runBlockingTest {
+    fun should_insert_note_into_database() = runBlockingTest {
         val noteBean = NoteBean(id = 1,"Title", "Text", "01.01.01", "01.01.01")
         dao.insertNote(noteBean)
 
@@ -48,7 +48,7 @@ class NoteDaoTest {
     }
 
     @Test
-    fun deleteShoppingItem() = runBlockingTest {
+    fun should_delete_note_from_database() = runBlockingTest {
         val noteBean = NoteBean(id = 1,"Title", "Text", "01.01.01", "01.01.01")
         dao.insertNote(noteBean)
         dao.deleteNote(noteBean)

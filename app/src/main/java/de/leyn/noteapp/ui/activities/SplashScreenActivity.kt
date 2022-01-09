@@ -33,7 +33,7 @@ class SplashScreenActivity : AppCompatActivity() {
     }
 
     private fun goToNextActivity() {
-        val intent = Intent(this, MainActivity::class.java)
+        val intent = Intent(this, OverviewListActivity::class.java)
         startActivity(intent)
     }
 }

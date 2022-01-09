@@ -5,18 +5,19 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import de.leyn.noteapp.App
-import de.leyn.noteapp.adapter.NoteRecyclerAdapter
-import de.leyn.noteapp.databinding.ActivityMainBinding
+import de.leyn.noteapp.databinding.ActivityOverviewListBinding
 import de.leyn.noteapp.db.NoteBean
+import de.leyn.noteapp.db.RoomNoteDataSourceImpl
 import de.leyn.noteapp.ui.DeleteConfirmationDialog
+import de.leyn.noteapp.ui.adapter.NoteRecyclerAdapter
 import de.leyn.noteapp.ui.viewmodel.NoteViewModel
 import de.leyn.noteapp.ui.viewmodel.ViewModelFactory
 
-class MainActivity : AppCompatActivity(),
-        NoteRecyclerAdapter.NoteViewHolder.OnNoteClickListener,
-        DeleteConfirmationDialog.DeleteNoteDialogListener {
+class OverviewListActivity : AppCompatActivity(),
+    NoteRecyclerAdapter.NoteViewHolder.OnNoteClickListener,
+    DeleteConfirmationDialog.DeleteNoteDialogListener {
 
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityOverviewListBinding
     private lateinit var viewModel: NoteViewModel
     private lateinit var recyclerAdapter: NoteRecyclerAdapter
     private val noteList: MutableList<NoteBean> = mutableListOf()
@@ -26,12 +27,12 @@ class MainActivity : AppCompatActivity(),
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityOverviewListBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
 
-        val db = (application as App).getDB()
-        viewModel = ViewModelFactory(db).create(NoteViewModel::class.java)
+        val dataSource = RoomNoteDataSourceImpl(applicationContext)
+        viewModel = ViewModelFactory(dataSource).create(NoteViewModel::class.java)
 
         fetchNotesList()
 

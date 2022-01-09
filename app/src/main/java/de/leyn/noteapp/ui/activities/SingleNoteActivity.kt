@@ -10,6 +10,7 @@ import de.leyn.noteapp.App
 import de.leyn.noteapp.R
 import de.leyn.noteapp.databinding.ActivitySingleNoteBinding
 import de.leyn.noteapp.db.NoteBean
+import de.leyn.noteapp.db.RoomNoteDataSourceImpl
 import de.leyn.noteapp.extensions.convertToString
 import de.leyn.noteapp.toEditable
 import de.leyn.noteapp.ui.viewmodel.NoteViewModel
@@ -38,8 +39,9 @@ class SingleNoteActivity : AppCompatActivity() {
             )
             setHomeAsUpIndicator(backArrow)
         }
-        val db = (application as App).getDB()
-        viewModel = ViewModelFactory(db).create(NoteViewModel::class.java)
+
+        val dataSource = RoomNoteDataSourceImpl(applicationContext)
+        viewModel = ViewModelFactory(dataSource).create(NoteViewModel::class.java)
 
 
         if (intent.hasExtra(App.INTENT_NOTE)) {

@@ -25,7 +25,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activities.MainActivity"
+            android:name=".ui.activities.OverviewListActivity"
             android:exported="true"
             android:label="@string/app_name" />
     </application>
