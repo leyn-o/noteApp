@@ -129,31 +129,27 @@ class SingleNoteActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.colorBlue -> {
-                setLayoutBackgroundColorTo(R.color.noteBackgroundBlue)
+                setLayoutBackgroundColorTo(NoteColors.BLUE.hexColor)
                 currentHexBackgroundColor = NoteColors.BLUE.hexColor
                 true
             }
             R.id.colorGreen -> {
-                setLayoutBackgroundColorTo(R.color.noteBackgroundGreen)
+                setLayoutBackgroundColorTo(NoteColors.GREEN.hexColor)
                 currentHexBackgroundColor = NoteColors.GREEN.hexColor
                 true
             }
             R.id.colorRed -> {
-                setLayoutBackgroundColorTo(R.color.noteBackgroundRed)
+                setLayoutBackgroundColorTo(NoteColors.RED.hexColor)
                 currentHexBackgroundColor = NoteColors.RED.hexColor
                 true
             }
             R.id.colorYellow -> {
-                setLayoutBackgroundColorTo(R.color.noteBackgroundYellow)
+                setLayoutBackgroundColorTo(NoteColors.YELLOW.hexColor)
                 currentHexBackgroundColor = NoteColors.YELLOW.hexColor
                 true
             }
             else -> super.onOptionsItemSelected(item)
         }
-    }
-
-    private fun setLayoutBackgroundColorTo(colorRes: Int) {
-        binding.layout.setBackgroundColor(resources.getColor(colorRes, null))
     }
 
     private fun setLayoutBackgroundColorTo(hexColor: String) {

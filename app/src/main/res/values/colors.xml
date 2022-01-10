@@ -16,9 +16,9 @@
     <color name="onSurface">#252525</color>
     <color name="onError">#FFFFFFFF</color>
 
-    <color name="noteBackgroundYellow">#FBEDC0</color>
-    <color name="noteBackgroundGreen">#CDFBC0</color>
-    <color name="noteBackgroundBlue">#C0CDFB</color>
-    <color name="noteBackgroundRed">#FBC0C0</color>
+    <color name="noteBackgroundYellow">#FBF2D5</color>
+    <color name="noteBackgroundGreen">#DCFBD5</color>
+    <color name="noteBackgroundBlue">#D5E4FB</color>
+    <color name="noteBackgroundRed">#FBD5D5</color>
 
 </resources>
