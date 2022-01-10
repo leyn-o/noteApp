@@ -1,4 +1,4 @@
-package de.leyn.noteapp.ui.activities
+package de.leyn.noteapp.presentation.splash
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,6 +7,7 @@ import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import de.leyn.noteapp.R
+import de.leyn.noteapp.presentation.note_list.OverviewListActivity
 
 class SplashScreenActivity : AppCompatActivity() {
 

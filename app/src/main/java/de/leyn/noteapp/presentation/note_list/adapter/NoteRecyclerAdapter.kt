@@ -1,4 +1,4 @@
-package de.leyn.noteapp.ui.adapter
+package de.leyn.noteapp.presentation.note_list.adapter
 
 import android.graphics.Color
 import android.view.LayoutInflater
@@ -7,13 +7,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import de.leyn.noteapp.R
 import de.leyn.noteapp.databinding.RecyclerNoteCardBinding
-import de.leyn.noteapp.db.NoteBean
+import de.leyn.noteapp.domain.model.Note
 
 /**
  * Created by Leyn on 15.11.2021.
  */
 class NoteRecyclerAdapter(
-    private var noteList: List<NoteBean>,
+    private var noteList: List<Note>,
     private val onNoteClickListener: NoteViewHolder.OnNoteClickListener
 ) :
     RecyclerView.Adapter<NoteRecyclerAdapter.NoteViewHolder>() {
@@ -46,7 +46,7 @@ class NoteRecyclerAdapter(
             }
         }
 
-        fun bindContent(note: NoteBean) {
+        fun bindContent(note: Note) {
             binding.noteCard.setBackgroundColor(Color.parseColor(note.color))
             binding.cardTitle.text = note.title
             binding.cardText.text = note.text

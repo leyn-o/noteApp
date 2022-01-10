@@ -1,4 +1,4 @@
-package de.leyn.noteapp.db
+package de.leyn.noteapp.domain.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -9,7 +9,7 @@ import java.io.Serializable
  * Created by Leyn on 14.11.2021.
  */
 @Entity(tableName = "notes")
-data class NoteBean(
+data class Note(
     @PrimaryKey(autoGenerate = true)
     var id: Int? = null,
     @ColumnInfo(name = "title") var title: String,

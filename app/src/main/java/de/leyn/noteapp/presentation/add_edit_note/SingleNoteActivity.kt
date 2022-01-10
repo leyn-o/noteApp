@@ -1,4 +1,4 @@
-package de.leyn.noteapp.ui.activities
+package de.leyn.noteapp.presentation.add_edit_note
 
 import android.graphics.Color
 import android.graphics.PorterDuff
@@ -13,13 +13,13 @@ import androidx.core.widget.doOnTextChanged
 import de.leyn.noteapp.App
 import de.leyn.noteapp.R
 import de.leyn.noteapp.databinding.ActivitySingleNoteBinding
-import de.leyn.noteapp.db.NoteBean
-import de.leyn.noteapp.db.NoteColors
-import de.leyn.noteapp.db.RoomNoteDataSourceImpl
+import de.leyn.noteapp.domain.model.Note
+import de.leyn.noteapp.domain.model.NoteColors
+import de.leyn.noteapp.data.repositories.RoomNoteRepositoryImpl
 import de.leyn.noteapp.extensions.convertToDateTimeString
 import de.leyn.noteapp.toEditable
-import de.leyn.noteapp.ui.viewmodel.NoteViewModel
-import de.leyn.noteapp.ui.viewmodel.ViewModelFactory
+import de.leyn.noteapp.presentation.viewmodel.NoteViewModel
+import de.leyn.noteapp.presentation.viewmodel.ViewModelFactory
 import java.util.*
 
 class SingleNoteActivity : AppCompatActivity() {
@@ -53,13 +53,13 @@ class SingleNoteActivity : AppCompatActivity() {
             )
         }
 
-        val dataSource = RoomNoteDataSourceImpl(applicationContext)
+        val dataSource = RoomNoteRepositoryImpl(applicationContext)
         viewModel = ViewModelFactory(dataSource).create(NoteViewModel::class.java)
 
 
         if (intent.hasExtra(App.INTENT_NOTE)) {
             viewModel.isNewNote = false
-            val note = intent.getSerializableExtra(App.INTENT_NOTE) as NoteBean
+            val note = intent.getSerializableExtra(App.INTENT_NOTE) as Note
             viewModel.singleNote = note
             binding.titleEditText.text = note.title.toEditable()
             binding.textEditText.text = note.text.toEditable()
@@ -82,7 +82,7 @@ class SingleNoteActivity : AppCompatActivity() {
         if (viewModel.isNewNote) {
             if (!isEmptyContent()) {
                 viewModel.insertNote(
-                    NoteBean(
+                    Note(
                         title = binding.titleEditText.text.toString(),
                         text = binding.textEditText.text.toString(),
                         createdDate = Date().convertToDateTimeString(),

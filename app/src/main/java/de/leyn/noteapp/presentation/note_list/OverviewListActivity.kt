@@ -1,4 +1,4 @@
-package de.leyn.noteapp.ui.activities
+package de.leyn.noteapp.presentation.note_list
 
 import android.content.Intent
 import android.graphics.PorterDuff
@@ -13,13 +13,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import de.leyn.noteapp.App
 import de.leyn.noteapp.R
 import de.leyn.noteapp.databinding.ActivityOverviewListBinding
-import de.leyn.noteapp.db.NoteBean
-import de.leyn.noteapp.db.RoomNoteDataSourceImpl
+import de.leyn.noteapp.domain.model.Note
+import de.leyn.noteapp.data.repositories.RoomNoteRepositoryImpl
 import de.leyn.noteapp.extensions.convertToDate
-import de.leyn.noteapp.ui.DeleteConfirmationDialog
-import de.leyn.noteapp.ui.adapter.NoteRecyclerAdapter
-import de.leyn.noteapp.ui.viewmodel.NoteViewModel
-import de.leyn.noteapp.ui.viewmodel.ViewModelFactory
+import de.leyn.noteapp.presentation.add_edit_note.SingleNoteActivity
+import de.leyn.noteapp.presentation.note_list.adapter.NoteRecyclerAdapter
+import de.leyn.noteapp.presentation.note_list.dialog.DeleteConfirmationDialog
+import de.leyn.noteapp.presentation.viewmodel.NoteViewModel
+import de.leyn.noteapp.presentation.viewmodel.ViewModelFactory
 
 class OverviewListActivity : AppCompatActivity(),
     NoteRecyclerAdapter.NoteViewHolder.OnNoteClickListener,
@@ -28,7 +29,7 @@ class OverviewListActivity : AppCompatActivity(),
     private lateinit var binding: ActivityOverviewListBinding
     private lateinit var viewModel: NoteViewModel
     private lateinit var recyclerAdapter: NoteRecyclerAdapter
-    private val noteList: MutableList<NoteBean> = mutableListOf()
+    private val noteList: MutableList<Note> = mutableListOf()
 
     private var recyclerViewInitialized = false
 
@@ -41,7 +42,7 @@ class OverviewListActivity : AppCompatActivity(),
 
         changeMenuIcon()
 
-        val dataSource = RoomNoteDataSourceImpl(applicationContext)
+        val dataSource = RoomNoteRepositoryImpl(applicationContext)
         viewModel = ViewModelFactory(dataSource).create(NoteViewModel::class.java)
 
         fetchNotesList()

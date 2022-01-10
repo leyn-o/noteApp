@@ -1,4 +1,4 @@
-package de.leyn.noteapp.ui
+package de.leyn.noteapp.presentation.note_list.dialog
 
 import android.app.Dialog
 import android.content.Context
@@ -16,7 +16,7 @@ class DeleteConfirmationDialog(
 ) : DialogFragment() {
 
     private lateinit var listener: DeleteNoteDialogListener
-    val noteTitleQuotationMarks = "\"$noteTitle\""
+    private val noteTitleQuotationMarks = "\"$noteTitle\""
 
     interface DeleteNoteDialogListener {
         fun onDialogPositiveClick(position: Int)

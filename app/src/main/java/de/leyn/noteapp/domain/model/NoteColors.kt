@@ -1,4 +1,4 @@
-package de.leyn.noteapp.db
+package de.leyn.noteapp.domain.model
 
 /**
  * Created by Leyn on 09.01.2022.

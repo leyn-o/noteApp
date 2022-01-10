@@ -5,6 +5,9 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SmallTest
 import com.google.common.truth.Truth.assertThat
+import de.leyn.noteapp.data.data_source.NoteDatabase
+import de.leyn.noteapp.data.data_source.NoteDao
+import de.leyn.noteapp.domain.model.Note
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.After
@@ -20,27 +23,27 @@ import org.junit.runner.RunWith
 @SmallTest
 class NoteDaoTest {
 
-    private lateinit var databaseService: DatabaseService
+    private lateinit var noteDatabase: NoteDatabase
     private lateinit var dao: NoteDao
 
     @Before
     fun setup() {
-        databaseService = Room.inMemoryDatabaseBuilder(
+        noteDatabase = Room.inMemoryDatabaseBuilder(
             ApplicationProvider.getApplicationContext(),
-            DatabaseService::class.java
+            NoteDatabase::class.java
         ).allowMainThreadQueries()
             .build()
-        dao = databaseService.noteDao()
+        dao = noteDatabase.noteDao()
     }
 
     @After
     fun teardown() {
-        databaseService.close()
+        noteDatabase.close()
     }
 
     @Test
     fun should_insert_note_into_database() = runBlockingTest {
-        val noteBean = NoteBean(id = 1,"Title", "Text", "01.01.01", "01.01.01")
+        val noteBean = Note(id = 1,"Title", "Text", "01.01.01", "01.01.01")
         dao.insertNote(noteBean)
 
         val allNotes = dao.getAllNotes()
@@ -49,7 +52,7 @@ class NoteDaoTest {
 
     @Test
     fun should_delete_note_from_database() = runBlockingTest {
-        val noteBean = NoteBean(id = 1,"Title", "Text", "01.01.01", "01.01.01")
+        val noteBean = Note(id = 1,"Title", "Text", "01.01.01", "01.01.01")
         dao.insertNote(noteBean)
         dao.deleteNote(noteBean)
 

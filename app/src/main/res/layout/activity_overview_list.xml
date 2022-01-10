@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:backgroundTint="@color/background"
-    tools:context=".ui.activities.OverviewListActivity">
+    tools:context=".presentation.note_list.OverviewListActivity">
 
 
     <androidx.appcompat.widget.Toolbar
