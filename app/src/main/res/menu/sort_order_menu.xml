@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/dateDescending"
+        android:title="@string/createdDate_descending"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/dateAscending"
+        android:title="@string/createdDate_ascending"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/colorDescending"
+        android:title="@string/color_descending"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/colorAscending"
+        android:title="@string/color_ascending"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/titleDescending"
+        android:title="@string/title_descending"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/titleAscending"
+        android:title="@string/title_ascending"
+        app:showAsAction="never" />
+</menu>

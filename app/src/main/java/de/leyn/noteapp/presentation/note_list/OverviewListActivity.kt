@@ -109,19 +109,39 @@ class OverviewListActivity : AppCompatActivity(),
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater: MenuInflater = menuInflater
-        inflater.inflate(R.menu.list_menu, menu)
+        inflater.inflate(R.menu.sort_order_menu, menu)
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.latestFirst -> {
+            R.id.dateDescending -> {
                 noteList.sortByDescending { it.createdDate.convertToDate() }
                 recyclerAdapter.notifyDataSetChanged()
                 true
             }
-            R.id.oldestFirst -> {
+            R.id.dateAscending -> {
                 noteList.sortBy { it.createdDate.convertToDate() }
+                recyclerAdapter.notifyDataSetChanged()
+                true
+            }
+            R.id.colorDescending -> {
+                noteList.sortByDescending { it.color }
+                recyclerAdapter.notifyDataSetChanged()
+                true
+            }
+            R.id.colorAscending -> {
+                noteList.sortBy { it.color }
+                recyclerAdapter.notifyDataSetChanged()
+                true
+            }
+            R.id.titleDescending -> {
+                noteList.sortByDescending { it.title }
+                recyclerAdapter.notifyDataSetChanged()
+                true
+            }
+            R.id.titleAscending -> {
+                noteList.sortBy { it.title }
                 recyclerAdapter.notifyDataSetChanged()
                 true
             }

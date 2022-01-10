@@ -22,8 +22,13 @@
     <string name="content_description_more">Weitere Optionen</string>
     <string name="content_description_fab">add new note</string>
 
-    <string name="latest_first">Neuste zuerst</string>
-    <string name="oldest_first">Älteste zuerst</string>
+    <string name="createdDate_descending">Datum absteigend</string>
+    <string name="createdDate_ascending">Datum aufsteigend</string>
+    <string name="title_descending">Titel absteigend</string>
+    <string name="title_ascending">Titel aufsteigend</string>
+    <string name="color_descending">Farbe absteigend</string>
+    <string name="color_ascending">Farbe aufsteigend</string>
+
     <string name="created_at">Erstellt am:</string>
 
 
