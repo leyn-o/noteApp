@@ -40,11 +40,10 @@ class OverviewListActivity : AppCompatActivity(),
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
 
+        val repository = RoomNoteRepositoryImpl(applicationContext)
+        viewModel = ViewModelFactory(repository).create(NoteViewModel::class.java)
+
         changeMenuIcon()
-
-        val dataSource = RoomNoteRepositoryImpl(applicationContext)
-        viewModel = ViewModelFactory(dataSource).create(NoteViewModel::class.java)
-
         fetchNotesList()
 
         binding.fab.setOnClickListener { _ ->
@@ -98,7 +97,7 @@ class OverviewListActivity : AppCompatActivity(),
 
     override fun onNoteDeleteClicked(position: Int) {
         val dialog = DeleteConfirmationDialog(position, noteList[position].title)
-        dialog.show(supportFragmentManager, "deleteDialod")
+        dialog.show(supportFragmentManager, "deleteDialog")
     }
 
     override fun onDialogPositiveClick(position: Int) {

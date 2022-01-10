@@ -36,6 +36,9 @@ class SingleNoteActivity : AppCompatActivity() {
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
 
+        val repository = RoomNoteRepositoryImpl(applicationContext)
+        viewModel = ViewModelFactory(repository).create(NoteViewModel::class.java)
+
         supportActionBar?.apply {
             setDisplayHomeAsUpEnabled(true)
             setDisplayShowHomeEnabled(true)
@@ -53,21 +56,13 @@ class SingleNoteActivity : AppCompatActivity() {
             )
         }
 
-        val dataSource = RoomNoteRepositoryImpl(applicationContext)
-        viewModel = ViewModelFactory(dataSource).create(NoteViewModel::class.java)
-
-
-        if (intent.hasExtra(App.INTENT_NOTE)) {
-            viewModel.isNewNote = false
+        if (!isNewNote()) {
             val note = intent.getSerializableExtra(App.INTENT_NOTE) as Note
             viewModel.singleNote = note
-            binding.titleEditText.text = note.title.toEditable()
-            binding.textEditText.text = note.text.toEditable()
-            supportActionBar?.title = note.title
+            viewModel.isNewNote = false
             currentHexBackgroundColor = note.color
-            setLayoutBackgroundColorTo(note.color)
 
-
+            applyContentAndColorToView(note)
         } else {
             viewModel.isNewNote = true
             supportActionBar?.title = resources.getString(R.string.new_note)
@@ -76,6 +71,15 @@ class SingleNoteActivity : AppCompatActivity() {
         binding.titleEditText.doOnTextChanged { text, _, _, _ ->
             supportActionBar?.title = text
         }
+    }
+
+    private fun isNewNote() = !intent.hasExtra(App.INTENT_NOTE)
+
+    private fun applyContentAndColorToView(note: Note) {
+        binding.titleEditText.text = note.title.toEditable()
+        binding.textEditText.text = note.text.toEditable()
+        supportActionBar?.title = note.title
+        setLayoutBackgroundColorTo(note.color)
     }
 
     override fun onSupportNavigateUp(): Boolean {
